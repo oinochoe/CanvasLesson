@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .canvas {
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Transform</h1>
+    <canvas class="canvas" width="500" height="300"></canvas>
+    <script>
+      const canvas = document.querySelector('.canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.src = "../images/ilbuni1.png";
+      img.addEventListener('load', render);
+
+      let angle = 0;
+
+      function toRadian(deg) {
+        return deg * Math.PI / 180;
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // 이미지의 중심점으로 이동
+        ctx.translate(100+45, 100+60);
+        ctx.rotate(toRadian(angle));
+        // 위치 복귀
+        ctx.translate(-(100+45), -(100+60));
+        ctx.drawImage(img, 100, 100, 90, 120);
+        angle += 0.001;
+        requestAnimationFrame(render);
+      }
+
+      render();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

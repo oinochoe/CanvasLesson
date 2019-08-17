@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      canvas {
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas class="canvas" width="600" height="400">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+
+    <script>
+      // beginPath
+      // moveTo
+      // lineTo
+      // closePath
+      const canvas = document.querySelector('.canvas');
+      const ctx = canvas.getContext('2d');
+
+      // beginPath : 선의 시작점을 알린다
+      ctx.beginPath();
+      ctx.moveTo(100, 100);
+      ctx.lineTo(200, 230);
+      ctx.lineTo(200, 330);
+      ctx.lineTo(250, 330);
+      ctx.lineTo(320, 130);
+      ctx.lineTo(120, 80);
+      ctx.lineTo(100, 100);
+      ctx.stroke();
+      // 마무리를 해주고 다른 것을 시작하겟다;
+      ctx.closePath();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

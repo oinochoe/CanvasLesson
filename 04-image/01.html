@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      canvas {
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Image</h1>
+    <canvas class="canvas" width="600" height="400">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+
+    <script>
+      const canvas = document.querySelector('.canvas');
+      const ctx = canvas.getContext('2d');
+
+      // const img = document.createElement('img');
+      const img = new Image();
+      img.src = '../images/ilbuni1.png';
+
+      // 크기 세팅을 따로 안해주면 원래 사이즈로 들어감..
+      // drawImage에 img를 그냥 넣어주면 로드가 안되어서 안나올 수 있음.. 
+      // 이미지가 로드될 때까지 기다렸다가 실행
+      img.addEventListener('load', () => {
+        //ctx.drawImage(img, 50, 50, 70, 100); 
+        // careatePattern을 이용하여 이미지를 패턴처럼 채울 수도 있다.
+        ctx.fillStyle = ctx.createPattern(img, 'repeat');
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+      });
+
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

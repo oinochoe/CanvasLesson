@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body{
+        margin:0;
+      }
+      .canvas {
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>requestAnimationFrame</h1>
+    <canvas class="canvas" width="500" height="300"></canvas>
+
+    <script>
+      const canvas = document.querySelector('.canvas');
+      const ctx = canvas.getContext('2d');
+      let xPos = 0;
+      let timer = 0;
+
+      function render() {
+        timer++;
+
+        if(timer % 60 == 0) { // 60 , 120 , 180 .. 60프레임. 즉 1초마다 실행되는 것이다.
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillRect(xPos, 100, 20, 20);
+          if (xPos >= canvas.width - 20) {
+            return;
+          }
+          xPos += 20;
+        }
+
+        requestAnimationFrame(render);
+      }
+      render();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

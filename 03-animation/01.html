@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body{
+        margin:0;
+      }
+      .canvas {
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>requestAnimationFrame</h1>
+    <canvas class="canvas" width="500" height="300"></canvas>
+
+    <script>
+      const canvas = document.querySelector('.canvas');
+      const ctx = canvas.getContext('2d');
+      let xPos = 0;
+
+      function render() {
+        console.log('render 호출');
+
+        //console.time();
+
+        // 의미상으로 명확한 이걸 자주쓴다..
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // 넓이를 바꾸면 자동으로 지운다..
+        // canvas.width = canvas.width;
+        //console.timeEnd();
+
+        ctx.fillRect(xPos, 100, 20, 20);
+
+        if (xPos >= canvas.width - 20) {
+          return;
+        }
+
+        xPos++;
+
+        requestAnimationFrame(render);
+      }
+      render();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

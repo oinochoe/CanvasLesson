@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        margin:0;
+      }
+      .canvas {
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>setInterval</h1>
+    <canvas class="canvas" width="500" height="300"></canvas>
+
+    <script>
+      const canvas = document.querySelector('.canvas');
+      const ctx = canvas.getContext('2d');
+      let xPos = 0;
+
+      function render () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillRect(xPos, 100, 20, 20);
+        if (xPos >= canvas.width - 20) {
+          return;
+        }
+        xPos++;
+      }
+      // setInterval 는 지 갈길을 가기 때문에 requestAnimationFrame을 쓴다
+      // setInterval(render, 10);
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

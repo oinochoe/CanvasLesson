@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      canvas {
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas class="canvas" width="600" height="400">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+
+    <script>
+      // beginPath
+      // arc
+      // closePath
+      /* function toRadian(deg) {
+        return deg * Math.PI / 180;
+      } */
+
+      const canvas = document.querySelector('.canvas');
+      const ctx = canvas.getContext('2d');
+
+      let degree = 0;
+      // Enables browser-decided smooth animation (60fps)
+      const raf =
+          window.requestAnimationFrame ||
+          window.mozRequestAnimationFrame ||
+          window.webkitRequestAnimationFrame ||
+          window.msRequestAnimationFrame;
+          window.requestAnimationFrame = raf;
+
+      function animate (draw_to) {
+        draw_to = degree * Math.PI / 180;
+        // path로 그리겠다.
+        ctx.beginPath();
+        // arc - x위치, y위치, 반지름, 시작값, 끝값, ? 
+        // ctx.arc(200, 200, 50, Math.PI * 2, false);
+        ctx.arc(200, 200, 100, 0, draw_to, false);
+        ctx.stroke();
+
+        degree++;
+
+        if (degree < 360) {
+          // Recursive repeat this function until the end is reached
+          requestAnimationFrame(function () {
+            animate(draw_to);
+          });
+        }
+      }
+
+      animate();
+
+      ctx.fillStyle = 'red';
+      ctx.fillRect(195, 195, 10, 10);
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
