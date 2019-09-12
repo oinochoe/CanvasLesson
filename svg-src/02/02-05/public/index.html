@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SVG</title>
+  <style>
+    .face-obj {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 200px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <object class="face-obj" data="images/face_obj.svg" type="image/svg+xml"></object>
+  <!-- <img src="images/face_obj.svg" alt=""> -->
+  <!-- img로 svg를 넣었을 때와 달리, -->
+  <!-- 외부에서 스크립트로 조작 가능 -->
+
+  <script>
+    window.addEventListener('load', () => {
+      const objElem = document.querySelector('.face-obj');
+      const doc = objElem.contentDocument;
+      const faceElem = doc.querySelector('.face');
+      
+      faceElem.addEventListener('click', () => {
+        faceElem.classList.toggle('ani-on');
+      });
+    });
+  </script>
+</body>
+</html>

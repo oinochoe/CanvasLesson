@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        width: 100%;
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas class="canvas" width="600" height="400">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+
+    <script>
+      const canvas = document.querySelector('.canvas');
+      const ctx = canvas.getContext('2d');
+      const rectArray = [];
+      let currentRect;
+      let ratio = 1;
+      // phase가 1이면 기본 상태
+      // phase가 2면 서브 패널 열린 상태
+      let phase = 1;
+      let panelY = canvas.height;
+      const mouse = {
+        x: 0,
+        y: 0
+      };
+
+      for (let i = 0; i < 7; i++) {
+        rectArray.push({
+          num: i,
+          speed: Math.random() + 0.05,
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          width: 100,
+          height: 100
+        });
+      }
+      
+      let rect;
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = 0; i < rectArray.length; i++) {
+          rect = rectArray[i];
+          if (rect.x > canvas.width) {
+            rect.x = -rect.width;
+          }
+          ctx.fillStyle = "rgba(0, 0, 255, 0.8)";
+          ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+          ctx.fillStyle = 'black';
+          ctx.font = 'bold 30px sans-serif';
+          ctx.fillText(rect.num, rect.x+40, rect.y+50);
+        }
+
+        switch (phase) {
+          case 1:
+            // 기본 상태
+            for (let i = 0; i < rectArray.length; i++) {
+              rect = rectArray[i];
+              rect.x += rect.speed;
+            }
+            break;
+
+            // 패널 애니메이션
+          case 2:
+            ctx.fillRect(200, panelY, 200, 300);
+            if (panelY <= 50) {
+              phase = 3;
+              panelY = canvas.height;
+            }
+            panelY -= 10;
+            break;
+
+          case 3:
+            // 서브패널 열린 상태
+            ctx.fillRect(200, 50, 200, 300);
+            ctx.save();
+            ctx.fillStyle = 'white';
+            ctx.fillText(currentRect.num, 250, 100);
+            ctx.restore();
+            break;
+        }
+
+        requestAnimationFrame(render);
+      }
+
+      function setLayout() {
+        ratio = canvas.width / window.innerWidth;
+      }
+
+      window.addEventListener('click', (e) => {
+        mouse.x = e.clientX * ratio;
+        mouse.y = e.clientY * ratio;
+        for (let i = 0; i < rectArray.length; i++) {
+          rect = rectArray[i];
+          if (mouse.x >= rect.x &&
+            mouse.x <= rect.x + rect.width &&
+            mouse.y >= rect.y &&
+            mouse.y <= rect.y + rect.height) {
+            currentRect = rect;
+          }
+        }
+        
+        if (phase == 1 && currentRect) {
+          phase = 2;
+        } else if (phase == 3) {
+          phase = 1;
+        }
+      });
+
+      window.addEventListener('resize', setLayout);
+      setLayout();
+      render();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

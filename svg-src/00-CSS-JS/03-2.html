@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .box {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: 100px;
+        height: 100px;
+        background: red;
+        transition: 0.5s;
+      }
+      .box.active {
+        transform: scale(1.5) rotate(45deg) translate(120px, 50px);
+      }
+      .box span {
+        font-size: 2rem;
+        background: yellow;
+      }
+    </style>
+    <script>
+      // window.addEventListener('load', () => {
+      // window.addEventListener('DOMContentLoaded', () => {
+      //   const box = document.querySelector('.box');
+      //   console.log(box);
+      // });
+    </script>
+  </head>
+  
+  <body>
+    <div class="box">
+      <span>ssss</span>
+    </div>
+    
+    <script>
+      (function () {
+
+        const box = document.querySelector('.box');
+        // 함수가 이벤트핸들러(이벤트리스너)로서 실행이 되면 첫번째 매개변수 자리에 Event 객체가 들어오는데,
+        // this
+        // 이벤트객체.currentTarget
+        // 이벤트객체.target
+
+        // box.addEventListener('click', function (e) {
+        //   this.classList.add('active');
+        //   console.log(this);
+          // console.log(e.currentTarget);
+          // console.log(e.target);
+        // });
+
+
+        // 이벤트핸들러 함수를 화살표 함수로 작성했을 때는
+        // this가 Window를 가리킨다 (주의!)
+        box.addEventListener('click', (e) => {
+          // console.log(this);
+          e.currentTarget.classList.add('active');
+        });
+
+      })();
+
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

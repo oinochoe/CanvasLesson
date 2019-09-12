@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas class="canvas" width="600" height="400">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+
+    <script>
+      const canvas = document.querySelector('.canvas');
+      const ctx = canvas.getContext('2d');
+      const rect = {
+        x: 100,
+        y: 100,
+        width: 50,
+        height: 70
+      };
+      
+      function render() {
+        ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+      }
+
+      window.addEventListener('click', (e) => {
+        if (e.clientX >= rect.x &&
+          e.clientX <= rect.x + rect.width &&
+          e.clientY >= rect.y &&
+          e.clientY <= rect.y + rect.height) {
+          console.log('사각형 클릭');
+        }
+      });
+
+      render();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        width: 100%;
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas class="canvas" width="600" height="400">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+
+    <script>
+      const canvas = document.querySelector('.canvas');
+      const ctx = canvas.getContext('2d');
+      const rectArray = [];
+      let currentRect;
+      let ratio = 1;
+      const mouse = {
+        x: 0,
+        y: 0
+      };
+
+      for (let i = 0; i < 7; i++) {
+        rectArray.push({
+          num: i,
+          x: Math.random() * 600,
+          y: Math.random() * 400,
+          width: 100,
+          height: 100
+        });
+      }
+      
+      let rect;
+      function render() {
+        for (let i = 0; i < rectArray.length; i++) {
+          rect = rectArray[i];
+          ctx.fillStyle = "rgba(0, 0, 255, 0.8)";
+          ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+          ctx.fillStyle = 'black';
+          ctx.font = 'bold 30px sans-serif';
+          ctx.fillText(rect.num, rect.x+40, rect.y+50);
+        }
+      }
+
+      function setLayout() {
+        ratio = canvas.width / window.innerWidth;
+      }
+
+      window.addEventListener('click', (e) => {
+        mouse.x = e.clientX * ratio;
+        mouse.y = e.clientY * ratio;
+        for (let i = 0; i < rectArray.length; i++) {
+          rect = rectArray[i];
+          if (mouse.x >= rect.x &&
+            mouse.x <= rect.x + rect.width &&
+            mouse.y >= rect.y &&
+            mouse.y <= rect.y + rect.height) {
+            currentRect = rect;
+          }
+        }
+        console.log(currentRect);
+      });
+
+      window.addEventListener('resize', setLayout);
+      setLayout();
+      render();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

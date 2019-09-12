@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        margin: 0;
+      }
+      .canvas {
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas class="canvas" width="500" height="300"></canvas>
+
+    <script>
+      const canvas = document.querySelector('.canvas');
+      const ctx = canvas.getContext('2d');
+      let r = 100;
+      let angle = 0;
+      let xPos = 0;
+      let yPos = 0;
+
+      function toRadian(d) {
+        return d * Math.PI / 180;
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        xPos = Math.cos(toRadian(angle)) * r;
+        yPos = Math.sin(toRadian(angle)) * r;
+        ctx.beginPath();
+        ctx.arc(xPos + 250, yPos + 150, 10, 0, Math.PI*2);
+        ctx.fill();
+        angle++;
+        console.log(xPos, yPos);
+        requestAnimationFrame(render);
+      }
+
+      render();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
